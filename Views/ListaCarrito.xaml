@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Proyectoprogreso2.ViewModels"
              x:Class="Proyectoprogreso2.ListaCarrito"
              Title="ListaCarrito">
+    <ContentPage.BindingContext>
+        <viewModels:ListaCarritoViewModel />
+    </ContentPage.BindingContext>
     <VerticalStackLayout>
 
         <HorizontalStackLayout HorizontalOptions="Center">
@@ -17,6 +21,7 @@
 
         <ListView x:Name="ListaViewCarrito"
                   RowHeight="80"
+                  ItemsSource="{Binding ListaProducto}"
                   ItemSelected="OnItemSelected">
 
             <!-- Encabezados de la lista -->
@@ -54,8 +59,8 @@
             </ListView.Header>
 
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+                <DataTemplate >
+                    <ViewCell >
                         <Grid BackgroundColor="White">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />

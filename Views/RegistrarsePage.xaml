@@ -23,28 +23,35 @@ HorizontalOptions="Fill" BackgroundColor="White"/>
             <TableRoot>
                 <TableSection Title="Ingrese sus datos" TextColor="Red"  >
 
-                    <EntryCell x:Name="ID"  
-  Placeholder="Cédula"
-  />
-                    <EntryCell x:Name="Nombre"  
-  Placeholder="Nombre"
-  />
+                    <EntryCell x:Name="ID"
+                               Text="{Binding Id}"
+                          Placeholder="Cédula"
+                          />
+                    <EntryCell x:Name="Nombre"
+                               Text="{Binding Nombre}"
+                          Placeholder="Nombre"
+                          />
 
-                    <EntryCell x:Name="Apellido"  
-  Placeholder="Apellido"
-  />
-                    <EntryCell x:Name="Direccion"  
-  Placeholder="Dirección"
-  />
-                    <EntryCell x:Name="Tarjeta"  
-  Placeholder="Número de tarjeta"
-  />
+                    <EntryCell x:Name="Apellido"
+                               Text="{Binding Apellido}"
+                               Placeholder="Apellido"
+                      />
+                    <EntryCell x:Name="Direccion"
+                               Text="{Binding Direccion}"
+                               Placeholder="Dirección"
+                      />
+                    <EntryCell x:Name="Tarjeta"
+                               Text="{Binding Tarjeta}"
+                                          Placeholder="Número de tarjeta"
+                                          />
                     
                     <EntryCell x:Name="NombreU"
+                               Text="{Binding NombreU}"
                        
              Placeholder="Nombre de Usuario"/>
                     <EntryCell x:Name="Contraseña"  
                      Placeholder="Contraseña"
+                               Text="{Binding Contrasenia}"
                      />
 
                 </TableSection>

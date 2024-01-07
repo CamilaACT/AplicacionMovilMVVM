@@ -1,5 +1,6 @@
 using Proyectoprogreso2.Models;
 using Proyectoprogreso2.Service;
+using Proyectoprogreso2.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace Proyectoprogreso2;
@@ -8,23 +9,22 @@ public partial class EditarUsuario : ContentPage
 {
     private readonly APIService _ApiService;
     private Cliente _cliente;
+    private readonly EditarUsuarioViewModel _viewModel;
     public EditarUsuario(APIService apiservice)
     {
         InitializeComponent();
         _ApiService = apiservice;
+        _viewModel = new EditarUsuarioViewModel();
+        _viewModel.SetAPIService(apiservice);
+        BindingContext = _viewModel;
+
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        int idclient = Preferences.Get("idusuario", 0);
-        _cliente= await _ApiService.GetCliente(idclient);
-        ID.Text= _cliente.IdCliente.ToString();
-        Apellido.Text=_cliente.Apellido;
-        Nombre.Text=_cliente.Nombre;
-        Direccion.Text=_cliente.Direccion;
-        Tarjeta.Text=_cliente.NumeroTarjeta.ToString();
-        NombreU.Text=_cliente.Login;
-        Contraseña.Text=_cliente.Contrasenia;
+        int respuesta = await _viewModel.LoadDatos();
+        
+       
 
     }
     private async void OnClickLogin(object sender, EventArgs e)
@@ -34,20 +34,16 @@ public partial class EditarUsuario : ContentPage
 
     private async void OnClickRegistrarse(object sender, EventArgs e)
     {
-        Cliente Cli = new Cliente
+        int respuesta = await _viewModel.Editar();
+        if(respuesta == 1)
         {
-            IdCliente = 0,
-            Nombre = Nombre.Text,
-            Cedula = ID.Text,
-            Apellido = Apellido.Text,
-            Direccion=Direccion.Text,
-            NumeroTarjeta=Int32.Parse(Tarjeta.Text),
-            Login=NombreU.Text,
-            Contrasenia=Contraseña.Text
-        };
-        await _ApiService.PutCliente(Cli);
-        await Navigation.PopAsync();
-
+            await DisplayAlert("Yeiiiii", "Datos modificados correctamente", "OK");
+            await Navigation.PopAsync();
+        }
+        else
+        {
+            await DisplayAlert("Heeeeeeeeeeey", "Llene los campos correctamente, ashhhhh", "OK");
+        }
         
     }
 }

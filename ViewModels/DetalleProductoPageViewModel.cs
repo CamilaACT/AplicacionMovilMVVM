@@ -49,29 +49,25 @@ namespace Proyectoprogreso2.ViewModels
         }
 
         [RelayCommand]
-        public async Task OnClickAgregarAlCarrito()
+        public async Task<int> OnClickAgregarAlCarrito()
         {
             int usuarioid = Preferences.Get("idusuario", 0);
             if (usuarioid == 0)
             {
-                // Mostrar página de inicio de sesión
-                // Puedes implementar esta lógica según tu necesidad
-                // NavigationService.NavigateToLoginPage();
+                return -1;
             }
             else
             {
-                var cantidadSeleccionada = cantidadpicker + 1;
+                var cantidadSeleccionada = Cantidadpicker;
 
                 if (cantidadSeleccionada == 0)
                 {
-                    // Mostrar mensaje de advertencia
-                    // Puedes implementar esta lógica según tu necesidad
-                    // DisplayAlert("Espera", "Agrega algo al carrito primero :)", "OK");
+                    return 0;
                 }
                 else
                 {
                     int idIntencionCompra = Preferences.Get("CodigoIntencion", 0);
-
+                    cantidadSeleccionada = Cantidadpicker + 1;
                     IntencionDescripcionDTO intencionCompra = new IntencionDescripcionDTO
                     {
                         Cantidad = cantidadSeleccionada,
@@ -80,13 +76,7 @@ namespace Proyectoprogreso2.ViewModels
                     };
 
                     IntencionDescripcion intencionDescripcion = await _apiService.PostIntencionDescripcion(intencionCompra);
-                    // Mostrar mensaje de éxito
-                    // Puedes implementar esta lógica según tu necesidad
-                    // DisplayAlert("Éxito", "Agregaste el producto a tu carrito con éxito", "OK");
-
-                    // Cerrar la página de detalles
-                    // Puedes implementar esta lógica según tu necesidad
-                    // NavigationService.PopAsync();
+                    return 1;
                 }
             }
         }
@@ -103,21 +93,12 @@ namespace Proyectoprogreso2.ViewModels
             Descripcion = Producto.Producto.descripcion;
             Color = Producto.ColorProducto.nombre;
 
-            // Cargar los números en el Picker
-            //CargarNumerosEnPicker();
+
         }
-        //[RelayCommand]
-        //public void CargarNumerosEnPicker()
-        //{
-        //    Numeros = new List<string>();
-        //    for (int i = 1; i <= CantidadMaximaStock; i++)
-        //    {
-        //        Numeros.Add(i.ToString());
-        //    }
-        //}
+
         public async Task<List<string>> CargarNumerosEnPicker(int idProducto)
         {
-            // Cargar el producto desde el servicio
+
             Producto = await _apiService.GetProducto(idProducto);
             CantidadMaximaStock = Producto.stock;
 

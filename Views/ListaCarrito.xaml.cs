@@ -1,5 +1,6 @@
 using Proyectoprogreso2.Models;
 using Proyectoprogreso2.Service;
+using Proyectoprogreso2.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace Proyectoprogreso2;
@@ -8,22 +9,35 @@ public partial class ListaCarrito : ContentPage
 {
     private readonly APIService _ApiService;
     public double totalpreciof;
+    private readonly ListaCarritoViewModel _viewModel;
     public ListaCarrito(APIService apiservice)
 	{
 		InitializeComponent();
+        _viewModel = new ListaCarritoViewModel();
+        _viewModel.SetAPIService(apiservice);
+        BindingContext = _viewModel;
         _ApiService = apiservice;
+
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        int idintencioncompra = Preferences.Get("CodigoIntencion", 0);
-        List<IntencionDescripcion> listaProducto = await _ApiService.GetListaDescripcionIntencion(idintencioncompra);
-        var products = new ObservableCollection<IntencionDescripcion>(listaProducto);
-        ListaViewCarrito.ItemsSource = products;
-        var totalprecio = await _ApiService.GetPrecioTotal(idintencioncompra);
-        PrecioTotalCompra.Text= totalprecio.ToString();
-        totalpreciof=totalprecio;
+        LoadProductos();
+
+        //int idintencioncompra = Preferences.Get("CodigoIntencion", 0);
+        //List<IntencionDescripcion> listaProducto = await _ApiService.GetListaDescripcionIntencion(idintencioncompra);
+        //var products = new ObservableCollection<IntencionDescripcion>(listaProducto);
+        //ListaViewCarrito.ItemsSource = products;
+        //var totalprecio = await _ApiService.GetPrecioTotal(idintencioncompra);
+        //PrecioTotalCompra.Text= totalprecio.ToString();
+        //totalpreciof=totalprecio;
     }
+
+    private void LoadProductos()
+    {
+        _viewModel.LoadProductosCarritoAsync();
+    }
+
 
     private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {

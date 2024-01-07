@@ -17,7 +17,7 @@ public partial class ProductoPage : ContentPage
         _viewModel = new ProductoPageViewModel();
         _viewModel.SetAPIService(apiservice);
         BindingContext = _viewModel;
-        _ApiService = apiservice;
+        _ApiService=apiservice;
         int usuarioid = Preferences.Get("idusuario", 0);
         if (usuarioid==0)
         {
@@ -51,36 +51,7 @@ public partial class ProductoPage : ContentPage
     }
 
 
-
-    //private async void Btn_Buscar(object sender, EventArgs e)
-    //{
-    //    // Verificar si el Entry "Name" está vacío
-    //    if (string.IsNullOrWhiteSpace(ID.Text) || !int.TryParse(ID.Text, out int id))
-    //    {
-    //        // Entry está vacío, puedes mostrar un mensaje o simplemente salir del método
-    //        DisplayAlert("Advertencia", "Por favor, ingrese un ID válido.", "OK");
-    //        return;
-    //    }
-
-    //    // Continuar con la búsqueda ya que el Entry "Name" contiene algún valor
-    //    ProductoColorTalla p = await _ApiService.GetProducto(Int32.Parse(ID.Text));
-
-    //    // Verificar si se encontró un producto antes de navegar a la página de detalles
-    //    if (p != null )
-    //    {
-    //        await Navigation.PushAsync(new DetalleProductoPage(_ApiService)
-    //        {
-    //            BindingContext = p,
-    //        });
-    //    }
-    //    else
-    //    {
-    //        // Mostrar un mensaje si no se encontró ningún producto con el ID proporcionado
-    //        DisplayAlert("Advertencia", "No se encontró ningún producto con el ID proporcionado.", "OK");
-    //    }
-    //}
-
-    private async void OnUsuarioClicked(object sender, SelectedItemChangedEventArgs e)
+    private async void OnBuscaClicked(object sender, EventArgs e)
     {
 
         ProductoColorTalla resultado = await _viewModel.Buscar();
@@ -89,7 +60,7 @@ public partial class ProductoPage : ContentPage
         if (resultado !=null)
         {
             // Búsqueda exitosa, navegar a la página de detalles
-            await Navigation.PushAsync(new DetalleProductoPage(_ApiService,resultado.Producto.idProduto));
+            await Navigation.PushAsync(new DetalleProductoPage(_ApiService,resultado.idProductoColorTalla));
             
         }
         else
@@ -103,9 +74,7 @@ public partial class ProductoPage : ContentPage
     {
         base.OnAppearing();
         LoadProductos();
-        //List<ProductoColorTalla> listaProducto = await _ApiService.GetProductos();
-        //var products = new ObservableCollection<ProductoColorTalla>(listaProducto);
-        //ListaProducto.ItemsSource = products;
+
     }
     private async void OnClickShowDetails(object sender, SelectedItemChangedEventArgs e)
     {
@@ -121,11 +90,12 @@ public partial class ProductoPage : ContentPage
         {
             Navigation.PushAsync(new LoginPage(_ApiService));
         }
-        else {
+        else
+        {
 
             await Navigation.PushAsync(new MenuUsuario(_ApiService));
         }
-        
+
     }
 
 

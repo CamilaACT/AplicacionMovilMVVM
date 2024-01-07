@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Proyectoprogreso2.ViewModels"
              x:Class="Proyectoprogreso2.LoginPage"
              Title="LoginPage">
+    
+    <ContentPage.BindingContext>
+        <viewModels:LoginPageViewModel />
+    </ContentPage.BindingContext>
+    
     <VerticalStackLayout>
         <Image Source="data:image/png;base64,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"
                HeightRequest="100"
@@ -30,12 +36,14 @@
                        FontSize="16"
                        FontAttributes="Bold" />
                 <Entry x:Name="NombreU"
+                       Text="{Binding NombreU}"
                        Placeholder="Ingrese su nombre de usuario" />
                 <Label Text="Contraseña"
                        TextColor="Black"
                        FontSize="16"
                        FontAttributes="Bold" />
                 <Entry x:Name="Contraseña"
+                       Text="{Binding Contrasenia}"
                        Placeholder="Ingrese su contraseña"
                        IsPassword="True" />
             </StackLayout>

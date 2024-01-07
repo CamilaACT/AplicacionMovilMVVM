@@ -2,42 +2,37 @@
 using CommunityToolkit.Maui.Core;
 using Proyectoprogreso2.Models;
 using Proyectoprogreso2.Service;
+using Proyectoprogreso2.ViewModels;
 
 namespace Proyectoprogreso2;
 
 public partial class LoginPage : ContentPage
 {
     private readonly APIService _ApiService;
+    private readonly LoginPageViewModel _viewModel;
     public LoginPage(APIService apiservice)
 	{
 		InitializeComponent();
+        _viewModel = new LoginPageViewModel();
+        _viewModel.SetAPIService(apiservice);
+        BindingContext = _viewModel;
         _ApiService = apiservice;
     }
 
     private async void OnClickLogin(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(NombreU.Text) || string.IsNullOrWhiteSpace(Contraseña.Text))
+        int respuesta = await _viewModel.Login();
+        if (respuesta==-1)
         {
             await DisplayAlert("Campos vacíos", "Por favor, complete todos los campos.", "OK");
             
         }
         else
         {
-            Cliente clie = await _ApiService.GetUsuario(NombreU.Text, Contraseña.Text);
-            if (clie != null)
+            
+            if (respuesta == 1)
             {
-                IntencionCompraDTO intencion = new IntencionCompraDTO
-                {
-                    ClienteIdCliente=clie.IdCliente,
-                    Fecha="13/12/2023"
-
-                };
-                IntencionCompra intencionrespuesta = await _ApiService.PostIntencionCompra(intencion);
-
-                Preferences.Set("idusuario", clie.IdCliente);
-                Preferences.Set("CodigoIntencion", intencionrespuesta.IdIntencionCompra);
-                NombreU.Text="";
-                Contraseña.Text="";
+                await DisplayAlert("Bienvenido", "Inicio de sesión correcto", "OK");
                 await Navigation.PushAsync(new ProductoPage(_ApiService));
             }
             else
