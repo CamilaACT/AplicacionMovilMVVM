@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyectoprogreso2.DetallesDescripcionIntencion"
+             Title="DetallesDescripcionIntencion">
+    <VerticalStackLayout>
+
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cantidad"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Label x:Name="Cantidad"
+                   Text="Cantidad de producto selecionado:"
+                   FontSize="18" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Precio Total: "
+                   FontAttributes="Bold"
+                   FontSize="18" />
+            <Label x:Name="PrecioTotal"
+                   Text="PrecioTotal"
+                   FontSize="18" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Producto: "
+                   FontAttributes="Bold"
+                   FontSize="18" />
+            <Label x:Name="ProductoColorTalla"
+                   Text="ProductoColorTalla"
+                   FontSize="18" />
+        </StackLayout>
+
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Añadir"
+                    Clicked="OnClickQuitarDelCarrito"
+                    FontSize="20"
+                    Margin="5"
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="White"
+                    CornerRadius="50"
+                    BackgroundColor="Red" />
+            <Button Text="Salir"
+                    Clicked="OnClickSalir"
+                    FontSize="20"
+                    Margin="5"
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="Red"
+                    CornerRadius="50" />
+
+        </StackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

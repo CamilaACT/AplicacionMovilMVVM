@@ -1,0 +1,43 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyectoprogreso2.MenuUsuario"
+             Title="Menu Usuario">
+
+    <StackLayout VerticalOptions="Center">
+
+        <!-- Logo del Usuario -->
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center">
+            <Image Source="usuario.png"
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!-- Botones del Menú -->
+        <Button Text="Administrar Perfil"
+                FontSize="18"
+                BackgroundColor="White"
+                TextColor="Black"
+                Margin="20,0,20,10"
+                Clicked="OnAdministrarPerfilClicked" />
+
+        <Button Text="Visualizar Facturas"
+                FontSize="18"
+                BackgroundColor="White"
+                TextColor="Black"
+                Margin="20,0,20,10"
+                Clicked="OnVisualizarFacturaClicked" />
+
+        <Button Text="Cerrar Sesión"
+                FontSize="18"
+                BackgroundColor="Black"
+                TextColor="White"
+                Margin="20,0,20,10"
+                Clicked="OnCerrarSesionClicked" 
+                CornerRadius="50"/>
+
+    </StackLayout>
+
+</ContentPage>

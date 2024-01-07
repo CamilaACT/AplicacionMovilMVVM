@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyectoprogreso2.DetalleProductoPage"
+             xmlns:viewModels="clr-namespace:Proyectoprogreso2.ViewModels"
+             Title="DetalleProductoPage">
+
+    <ContentPage.BindingContext>
+        <viewModels:DetalleProductoPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <VerticalStackLayout>
+      
+        
+        <Label x:Name="Nombre"
+               FontAttributes="Bold"
+           Text="Nombre"
+           FontSize="32"
+           HorizontalOptions="Center"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Id: "
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Label x:Name="Id"
+                   Text="{Binding Id}"
+                   FontAttributes="Bold"
+                   FontSize="18" />
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cantidad: "
+                FontSize="18" FontAttributes="Bold"/>
+            <Label x:Name="Cantidad"
+                   Text="{Binding Cantidad}"
+                FontSize="18"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Descripción: "
+                   FontAttributes="Bold"
+           FontSize="18"/>
+            <Label x:Name="Descripcion"
+                   Text="{Binding Descripcion}"
+           FontSize="18"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Color: "
+                   FontAttributes="Bold"
+                FontSize="18"/>
+            <Label x:Name="Color"
+                   Text="{Binding Color}"
+                FontSize="18"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Cantidad:"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Picker x:Name="CantidadPicker"
+                    SelectedIndex="{Binding Cantidadpicker}"
+                    Title="Seleccionar cantidad"
+                    FontSize="18">
+            </Picker>
+        </StackLayout>
+     
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Añadir"
+                    Clicked="OnClickAgregarAlCarrito"
+                    FontSize="20"
+             Margin="5"
+             HorizontalOptions="FillAndExpand"
+             TextColor="White"
+             CornerRadius="50"
+             BackgroundColor="Red" 
+             />
+            <Button Text="Salir"
+                        Clicked="OnClickSalir"
+                FontSize="20"
+                Margin="5"
+                HorizontalOptions="FillAndExpand"
+                TextColor="White"
+                BackgroundColor="Black"
+                    BorderColor="Red"
+                    
+                    CornerRadius="50"/>
+            
+        </StackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

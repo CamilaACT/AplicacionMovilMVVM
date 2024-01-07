@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyectoprogreso2.ListaCarrito"
+             Title="ListaCarrito">
+    <VerticalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+
+            <Label FontAttributes="Bold"
+                   Text="Carrito"
+                   FontSize="30"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="Red" />
+        </HorizontalStackLayout>
+
+        <ListView x:Name="ListaViewCarrito"
+                  RowHeight="80"
+                  ItemSelected="OnItemSelected">
+
+            <!-- Encabezados de la lista -->
+            <ListView.Header>
+                <Grid BackgroundColor="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Producto"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Text="Cantidad"
+                           FontSize="15"
+                           TextColor="Black"
+                           HorizontalOptions="Center" />
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Text="Precio Total"
+                           FontSize="15"
+                           TextColor="Black"
+                           HorizontalOptions="Center" />
+                </Grid>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="{Binding ProductoColorTalla.Producto.nombre}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding Cantidad}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Text="{Binding PrecioTotal}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   HorizontalOptions="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Label encima del botón
+        <StackLayout Orientation="Horizontal"
+             Spacing="10">
+    <Label Text="ID:"
+           FontSize="15"
+           TextColor="Gray" />
+    <Label Text="{Binding idProductoColorTalla}"
+           FontSize="15"
+           TextColor="Black" />
+</StackLayout>-->
+        <StackLayout Orientation="Horizontal"
+                     Spacing="10">
+            <Label Text="Valor total del carrito:"
+                   FontSize="15"
+                   TextColor="Gray" />
+            <Label x:Name="PrecioTotalCompra"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!-- Botón en la parte del centro inferior -->
+        <Button Text="Comprar"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20"
+                Clicked="ComprarClick"
+                CornerRadius="50"/>
+    </VerticalStackLayout>
+</ContentPage>
