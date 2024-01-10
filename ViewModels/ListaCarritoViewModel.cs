@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Java.Lang;
 using Proyectoprogreso2.Models;
 using Proyectoprogreso2.Service;
 using System;
@@ -43,6 +44,11 @@ namespace Proyectoprogreso2.ViewModels
             var totalprecio = await _apiService.GetPrecioTotal(idintencioncompra);
             PrecioTotalCompra= totalprecio.ToString();
             totalpreciof=totalprecio;
+        }
+
+        public async Task<double> gettotalpreciof()
+        {
+            return totalpreciof;
         }
     }
 }

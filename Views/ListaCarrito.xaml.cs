@@ -8,7 +8,7 @@ namespace Proyectoprogreso2;
 public partial class ListaCarrito : ContentPage
 {
     private readonly APIService _ApiService;
-    public double totalpreciof;
+
     private readonly ListaCarritoViewModel _viewModel;
     public ListaCarrito(APIService apiservice)
 	{
@@ -59,6 +59,7 @@ public partial class ListaCarrito : ContentPage
     }
     private async void ComprarClick(object sender, EventArgs e)
     {
+        double totalpreciof = await _viewModel.gettotalpreciof();
         if (totalpreciof==0)
         {
             await DisplayAlert("Ashhhhh", "Primero agrega cosas a tu carrito :/", "OK");
